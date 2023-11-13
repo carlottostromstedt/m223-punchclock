@@ -30,4 +30,8 @@ public class EntryService {
         entityManager.remove(entry);
         return Response.status(204).build();
     }
+
+    public Entry getEntry(int id){
+        return entityManager.find(Entry.class, id);
+    }
 }

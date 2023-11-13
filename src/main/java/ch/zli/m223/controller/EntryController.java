@@ -42,7 +42,8 @@ public class EntryController {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Operation(summary = "Deletes an entry", description = "Deletes an entry and returns nothing")
-    public void delete(Entry entry){
+    public void delete(int id){
+        Entry entry = entryService.getEntry(id);
         entryService.deleteEntry(entry);
     }
 
