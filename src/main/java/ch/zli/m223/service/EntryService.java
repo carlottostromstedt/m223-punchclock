@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import javax.ws.rs.core.Response;
 
+import org.hibernate.Session;
+
 import ch.zli.m223.model.Entry;
 
 @ApplicationScoped
@@ -26,12 +28,19 @@ public class EntryService {
         return query.getResultList();
     }
 
-    public Response deleteEntry(Entry entry){
+    @Transactional
+    public Response deleteEntry(Long id){
+        Entry entry = entityManager.find(Entry.class, id);
         entityManager.remove(entry);
         return Response.status(204).build();
     }
 
-    public Entry getEntry(int id){
+    public Entry getEntry(Long id){
         return entityManager.find(Entry.class, id);
+    }
+
+    public Entry updateEntry(Long id, Entry entry){
+        entry.setId(id);
+        return entityManager.merge(entry);
     }
 }

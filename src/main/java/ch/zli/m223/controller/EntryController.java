@@ -1,14 +1,19 @@
 package ch.zli.m223.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
@@ -38,14 +43,19 @@ public class EntryController {
        return entryService.createEntry(entry);
     }
 
-    @POST
+    @DELETE
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Operation(summary = "Deletes an entry", description = "Deletes an entry and returns nothing")
-    public void delete(int id){
-        Entry entry = entryService.getEntry(id);
-        entryService.deleteEntry(entry);
+    public Response delete(Long id){
+        return entryService.deleteEntry(id);
     }
 
-
+    @PUT
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
+    public Entry update(Long id, Entry entry){
+        return entryService.updateEntry(id, entry);
+    }
 }

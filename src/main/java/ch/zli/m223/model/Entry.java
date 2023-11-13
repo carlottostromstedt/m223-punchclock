@@ -3,10 +3,13 @@ package ch.zli.m223.model;
 import javax.persistence.*;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Fetch;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name="ENTRY")
 public class Entry {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +21,10 @@ public class Entry {
 
   @Column(nullable = false)
   private LocalDateTime checkOut;
+
+  @ManyToOne(optional = false)
+  @Fetch(FetchMode.JOIN)
+  private Category category;
 
   public Long getId() {
     return id;
