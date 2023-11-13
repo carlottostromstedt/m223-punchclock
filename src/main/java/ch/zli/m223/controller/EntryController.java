@@ -16,8 +16,8 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import ch.zli.m223.model.Entry;
 import ch.zli.m223.service.EntryService;
 
-@Path("/entries")
-@Tag(name = "Entries", description = "Handling of entries")
+@Path("/entry")
+@Tag(name = "Entry", description = "Handling of entries")
 public class EntryController {
 
     @Inject
@@ -37,5 +37,14 @@ public class EntryController {
     public Entry create(Entry entry) {
        return entryService.createEntry(entry);
     }
+
+    @POST
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Deletes an entry", description = "Deletes an entry and returns nothing")
+    public void delete(Entry entry){
+        entryService.deleteEntry(entry);
+    }
+
 
 }

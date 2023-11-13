@@ -18,4 +18,9 @@ public class EntryResourceTest {
              .body(is("[]"));
     }
 
+    @Test
+    public void testDeleteEndpoint(){
+        
+    }
+
 }

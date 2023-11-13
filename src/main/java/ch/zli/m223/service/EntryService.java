@@ -6,6 +6,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import javax.ws.rs.core.Response;
 
 import ch.zli.m223.model.Entry;
 
@@ -23,5 +24,10 @@ public class EntryService {
     public List<Entry> findAll() {
         var query = entityManager.createQuery("FROM Entry", Entry.class);
         return query.getResultList();
+    }
+
+    public Response deleteEntry(Entry entry){
+        entityManager.remove(entry);
+        return Response.status(204).build();
     }
 }
