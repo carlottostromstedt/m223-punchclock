@@ -45,7 +45,6 @@ public class EntryController {
 
     @DELETE
     @Path("/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Operation(summary = "Deletes an entry", description = "Deletes an entry and returns nothing")
     public Response delete(Long id){
         return entryService.deleteEntry(id);
@@ -53,7 +52,6 @@ public class EntryController {
 
     @PUT
     @Path("/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
     public Entry update(Long id, Entry entry){
         return entryService.updateEntry(id, entry);

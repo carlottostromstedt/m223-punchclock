@@ -20,6 +20,14 @@ public class Category {
     @Column(nullable = false)
     private String title;
 
+    public Set<Entry> getEntries() {
+        return entries;
+    }
+
+    public void setEntries(Set<Entry> entries) {
+        this.entries = entries;
+    }
+
     @OneToMany(mappedBy = "category", orphanRemoval = true)
     @Fetch(FetchMode.JOIN)
     private Set<Entry> entries;
